@@ -9,6 +9,13 @@ module.exports = {
         PYTHONUNBUFFERED: "1",
         PORT: "8000"
       }
+    },
+    {
+      name: 'CRM-Bot-Static',
+      script: './static-server.js',
+      instances: 1,
+      autorestart: true,
+      watch: false
     }
   ]
 };

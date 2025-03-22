@@ -272,9 +272,6 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-# Mount the static directory to serve HTML files
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-
 
 # -------------------------------
 # Pipeline Functions for QA
@@ -316,6 +313,23 @@ def generate(question: str, context: List[Document]) -> str:
     response = llm.invoke(prompt_text)
     return response.content if hasattr(response, "content") else str(response)
 
+
+
+
+# -------------------------------
+# HealthCheck
+# -------------------------------
+
+@app.get("/")
+async def health_check():
+    """
+    Health check endpoint that returns the status of the API.
+    """
+    return {
+        "status": "healthy",
+        "service": "Document QA and Upload Service",
+        "version": "1.0.0",  # You can add version information
+    }
 
 # -------------------------------
 # Endpoints for Chat UI
@@ -405,19 +419,6 @@ async def replace_file(
         shutil.copyfileobj(file.file, buffer)
     reindex_vector_store()
     return FileInfo(file_id=file_id, original_filename=file.filename)
-
-
-# -------------------------------
-# Serve HTML files from static
-# -------------------------------
-@app.get("/")
-async def serve_index():
-    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
-
-
-@app.get("/chatbot.html")
-async def serve_chatbot():
-    return FileResponse(os.path.join(STATIC_DIR, "chatbot.html"))
 
 
 # -------------------------------
