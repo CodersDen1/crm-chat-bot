@@ -3,11 +3,11 @@ module.exports = {
     {
       name: "CRM-Bot",
       script: "bash",
-      args: "-c 'source env/bin/activate && uvicorn main:app --host localhost --port 8000 --reload'",
+      args: "-c 'source env/bin/activate && uvicorn main:app --host localhost --port 7777 --reload'",
       watch: true,
       env: {
         PYTHONUNBUFFERED: "1",
-        PORT: "8000"
+        PORT: "7777"
       }
     },
     {

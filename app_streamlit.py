@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # URL for your FastAPI backend
-BACKEND_URL = "http://localhost:8000"
+BACKEND_URL = "http://localhost:7777"
 
 st.title("Document QA Service")
 
