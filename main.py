@@ -440,4 +440,4 @@ if __name__ == "__main__":
     else:
         print(f"Found chatbot.html at: {os.path.abspath(chatbot_path)}")
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="localhost", port=8000)
